@@ -15,7 +15,7 @@
     "build:js:bannerize": "bannerize dist/videojs-watermark.js --banner=scripts/banner.ejs",
     "build:js:browserify": "browserify . -s videojs-watermark -t browserify-shim -t browserify-versionify -o dist/videojs-watermark.js",
     "build:js:uglify": "uglifyjs dist/videojs-watermark.js --comments --mangle --compress -o dist/videojs-watermark.min.js",
-    "build:js:copy": "node -e \"var s=require('shelljs');s.cp('-r','dist/*','../js/');\"",
+    "build:js:copy": "node -e \"var s=require('shelljs');s.cp('-f','dist/*','../js/');\"",
     "build:test": "babel-node scripts/build-test.js",
     "change": "chg add",
     "clean": "rimraf dist test/dist es5 && mkdirp dist test/dist es5",
@@ -69,23 +69,23 @@
     "test/"
   ],
   "dependencies": {
-    "video.js": "^6.2.0"
+    "video.js": "^6.7.2"
   },
   "devDependencies": {
     "babel": "^5.8.35",
     "babelify": "^6.4.0",
     "bannerize": "^1.0.2",
-    "bluebird": "^3.2.2",
+    "bluebird": "^3.5.1",
     "browserify": "^12.0.2",
     "browserify-shim": "^3.8.12",
     "browserify-versionify": "^1.0.6",
     "budo": "^8.0.4",
-    "chg": "^0.3.2",
+    "chg": "^0.3.3",
     "glob": "^6.0.3",
     "global": "^4.3.0",
     "karma": "^0.13.19",
     "karma-chrome-launcher": "^0.2.2",
-    "karma-detect-browsers": "^2.0.2",
+    "karma-detect-browsers": "^2.2.6",
     "karma-firefox-launcher": "^0.1.7",
     "karma-ie-launcher": "^0.2.0",
     "karma-qunit": "^0.1.9",
