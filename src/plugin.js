@@ -1,8 +1,8 @@
-import videojs from 'video.js';
+import videojs from "video.js";
 
 // Default options for the plugin.
 const defaults = {
-  position: 'top-right',
+  position: "top-right",
   fadeTime: 3000,
   url: undefined,
   image: undefined
@@ -18,20 +18,20 @@ const defaults = {
 const setupWatermark = (player, options) => {
   // Add a div and img tag
   const videoEl = player.el();
-  const div = document.createElement('div');
-  const img = document.createElement('img');
+  const div = document.createElement("div");
+  const img = document.createElement("img");
 
-  div.classList.add('vjs-watermark-content');
+  div.classList.add("vjs-watermark-content");
   div.classList.add(`vjs-watermark-${options.position}`);
   img.src = options.image;
 
   // if a url is provided make the image link to that URL.
   if (options.url) {
-    const a = document.createElement('a');
+    const a = document.createElement("a");
 
     a.href = options.url;
     // if the user clicks the link pause and open a new window
-    a.onclick = (e) => {
+    a.onclick = e => {
       e.preventDefault();
       player.pause();
       window.open(options.url);
@@ -41,7 +41,8 @@ const setupWatermark = (player, options) => {
   } else {
     div.appendChild(img);
   }
-  videoEl.appendChild(div);
+  //videoEl.appendChild(div);
+  videoEl.insertBefore(div, videoEl.childNodes[1] || null);
 };
 
 /**
@@ -52,12 +53,8 @@ const setupWatermark = (player, options) => {
  *                  fadeTime:
  *                  'The number of milliseconds before the inital watermark fade out'}]
  */
-const fadeWatermark = (options) => {
-  setTimeout(
-    () => document.getElementsByClassName('vjs-watermark-content')[0]
-      .classList.add('vjs-watermark-fade'),
-    options.fadeTime
-  );
+const fadeWatermark = options => {
+  setTimeout(() => document.getElementsByClassName("vjs-watermark-content")[0].classList.add("vjs-watermark-fade"), options.fadeTime);
 };
 
 /**
@@ -72,7 +69,7 @@ const fadeWatermark = (options) => {
  * @param    {Object} [options={}]
  */
 const onPlayerReady = (player, options) => {
-  player.addClass('vjs-watermark');
+  player.addClass("vjs-watermark");
 
   // if there is no image set just exit
   if (!options.image) {
@@ -85,7 +82,7 @@ const onPlayerReady = (player, options) => {
     return;
   }
 
-  player.on('play', () => fadeWatermark(options));
+  player.on("play", () => fadeWatermark(options));
 };
 
 /**
@@ -107,9 +104,9 @@ const watermark = function(options) {
 };
 
 // Register the plugin with video.js.
-videojs.registerPlugin('watermark', watermark);
+videojs.registerPlugin("watermark", watermark);
 
 // Include the version number.
-watermark.VERSION = '__VERSION__';
+watermark.VERSION = "__VERSION__";
 
 export default watermark;
